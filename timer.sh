@@ -22,10 +22,21 @@ while [ $tl -gt $deltat ]; do
     echo -n -e "-----" $BIWhite$(date --date "00:00:00 $tleft sec" "+%T")$White "seconds left -----  ($tl secs, $ftstart -> $tend)     \r"       
 done
 
-for ((i=0; i<5; i++)); do
+#commented out beeper sound
+: <<'END'
+(for ((i=0; i<5; i++)); do
     aplay beep/beat.wav || exit
 done
 for ((i=0; i<3; i++)); do
     aplay beep/flat.wav || exit
 done
-aplay beep/flat-end.wav || exit
+aplay beep/flat-end.wav || exit) &
+END
+
+t=0
+
+for ((t=0;;t++)); do
+    sleep 1
+    echo -n -e "-----"$BIRed$(date --date "00:00:00 $t sec" "+%T") "seconds passed $White----- ($tl secs, $ftstart -> $tend)      \r"
+done
+
