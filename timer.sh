@@ -1,5 +1,9 @@
 #!/bin/bash
 
+BIRed="\033[1;91m"
+White="\033[0;37m"
+BIWhite="\033[1;97m"
+
 tstart=$(date --utc +%s)
 strt=$1
 tl=0
